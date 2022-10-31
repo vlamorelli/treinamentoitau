@@ -17,6 +17,7 @@ public class SolucaoProfessor {
     }
 
     private String extracted(char c, String s) {
+
         if (s.isEmpty() || c > s.charAt(0)) {
             return c+"";
         }
