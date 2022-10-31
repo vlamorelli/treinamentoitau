@@ -1,7 +1,5 @@
 package br.com.letscode.turmaitau.projetoFinalModulo1;
 
-import java.util.Scanner;
-
 public class Conta {
 
     private String  nome;
@@ -12,11 +10,6 @@ public class Conta {
     double valorComTaxa = 0;
 
     public Conta(String nome, String cpf, String cnpj, String tipoPessoa, double saldo) {
-      /*  this.nome = nome;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-        this.tipoPessoa = tipoPessoa;
-        this.saldo = saldo;*/
         this.setNome(nome);
         this.setCpf(cpf);
         this.setCnpj(cnpj);
@@ -47,7 +40,7 @@ public class Conta {
 
         valorComTaxa = 0;
         if (this.getTipoPessoa().toString().equals("PJ")){
-            valorComTaxa = valor + (valor*0.05);
+            valorComTaxa = valor + (valor*0.005);
         }else{
             valorComTaxa = valor;
         }
