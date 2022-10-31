@@ -12,11 +12,16 @@ public class Conta {
     double valorComTaxa = 0;
 
     public Conta(String nome, String cpf, String cnpj, String tipoPessoa, double saldo) {
-        this.nome = nome;
+      /*  this.nome = nome;
         this.cpf = cpf;
         this.cnpj = cnpj;
         this.tipoPessoa = tipoPessoa;
-        this.saldo = saldo;
+        this.saldo = saldo;*/
+        this.setNome(nome);
+        this.setCpf(cpf);
+        this.setCnpj(cnpj);
+        this.setTipoPessoa(tipoPessoa);
+        this.setSaldo(saldo);
     }
 
     public void depositar(double valor) {

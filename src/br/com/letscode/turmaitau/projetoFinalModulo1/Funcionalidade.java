@@ -1,36 +1,13 @@
 package br.com.letscode.turmaitau.projetoFinalModulo1;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Aplicacao {
+public class Funcionalidade {
 
-  //  static final String OPCAOPESSOA = "Digite F para Pessoa Física ou J para Pessoa Juridica:";
-  //  static final String SEPARADOR = "==============================================================";
+    static final String OPCAOPESSOA = "Digite F para Pessoa Física ou J para Pessoa Juridica:";
+    static final String SEPARADOR = "==============================================================";
 
-    public static void main(String[] args) {
-
-        String[] conta;
-        Funcionalidade funcionalidade = new Funcionalidade();
-        conta = funcionalidade.abrirConta();
-        Conta novaConta = null;
-        switch (conta[4]) {
-            case "CC":
-                novaConta = new Conta(conta[0], conta[1], conta[2], conta[3], 0.0);
-                funcionalidade.operacoes(novaConta);
-                break;
-            case "CP":
-                break;
-            case "CI":
-                break;
-            default:
-                System.out.println("Opção Inválida!!!");
-                break;
-        }
-        //operacoes(novaConta);
-    }
-
- /*   public static String[] abrirConta(){
+    public String[] abrirConta(){
 
         Scanner entrada = new Scanner(System.in);
         String [] conta = new String[5];
@@ -69,11 +46,11 @@ public class Aplicacao {
             System.out.println("Digite o CPF: ");
             cpf = entrada.next();
 
-           conta[0] = nome;
-           conta[1] = cpf;
-           conta[2] = null;
-           conta[3] = "PF";
-           conta[4] = tipoConta;
+            conta[0] = nome;
+            conta[1] = cpf;
+            conta[2] = null;
+            conta[3] = "PF";
+            conta[4] = tipoConta;
 
         }else{
 
@@ -84,7 +61,7 @@ public class Aplicacao {
 
             System.out.println("Digite o CNPJ: ");
             cnpj = entrada.next();
-            
+
             conta[0] = nome;
             conta[1] = null;
             conta[2] = cnpj;
@@ -94,8 +71,7 @@ public class Aplicacao {
 
         return conta;
     }
-
-    public static void operacoes(Conta novaConta){
+    public void operacoes(Conta novaConta){
         //sacar, depositar, transferência, investir e consultar saldo
         String tipoOperacao="C";
         double valor = 0.0;
@@ -121,12 +97,12 @@ public class Aplicacao {
             switch (tipoOperacao) {
                 case "S":
                     System.out.println("Digite o valor que deseja sacar:");
-                     valor = entrada.nextDouble();
+                    valor = entrada.nextDouble();
                     novaConta.sacar(valor);
                     break;
                 case "D":
                     System.out.println("Digite o valor que deseja depositar:");
-                     valor = entrada.nextDouble();
+                    valor = entrada.nextDouble();
                     novaConta.depositar(valor);
                     break;
                 case "T":
@@ -148,7 +124,7 @@ public class Aplicacao {
         }
     }
 
-    public static String  validaTipoConta(String tipoPessoa){
+    public String  validaTipoConta(String tipoPessoa){
 
         String tipoConta;
         Scanner entrada = new Scanner(System.in);
@@ -172,5 +148,5 @@ public class Aplicacao {
 
         }
         return tipoConta;
-    }*/
+    }
 }
