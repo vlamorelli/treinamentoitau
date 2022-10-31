@@ -7,10 +7,8 @@ public class Conta {
     private String  nome;
     private String cpf;
     private String cnpj;
-
     private String tipoPessoa;
     private double saldo;
-
     double valorComTaxa = 0;
 
     public Conta(String nome, String cpf, String cnpj, String tipoPessoa, double saldo) {
@@ -30,7 +28,7 @@ public class Conta {
 
         valorComTaxa = taxacao(valor);
         double novoSaldoDaContaOrigem = getSaldo() - valorComTaxa;
-        setSaldoTransferencia(novoSaldoDaContaOrigem, valor, contaDestino);
+        setSaldo(novoSaldoDaContaOrigem, valor, contaDestino);
     }
 
     public void sacar(double valor) {
@@ -95,7 +93,7 @@ public class Conta {
         }
     }
 
-    public void setSaldoTransferencia(double saldo, double valor, Conta contaDestino) {
+    public void setSaldo(double saldo, double valor, Conta contaDestino) {
 
         if (saldo >= 0) {
             this.saldo = saldo;

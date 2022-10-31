@@ -76,22 +76,7 @@ public class Aplicacao {
 
         }else{
 
-            sb = new StringBuffer();
-            sb.append("Conta Corrente - Digite CC: ").append("\n");
-            sb.append("Conta Investimento - Digite CI: ").append("\n");
-            System.out.println(sb.toString());
-            tipoConta = entrada.next().toUpperCase();
-
-            while (!tipoConta.equals("CC") && !tipoConta.equals("CI")){
-                sb = new StringBuffer();
-                sb.append("Opção incorreta.").append("\n");
-                sb.append("Conta Corrente - Digite CC: ").append("\n");
-                sb.append("Conta Poupança - Digite CP: ").append("\n");
-                sb.append("Conta Investimento - Digite CI: ").append("\n");
-                System.out.println(sb.toString());
-                tipoConta = entrada.next().toUpperCase();
-
-            }
+            tipoConta = validaTipoConta (tipoPessoa);
 
             System.out.println("Digite o nome da empresa: ");
             nome = entrada.next();
