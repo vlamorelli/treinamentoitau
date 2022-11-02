@@ -1,15 +1,17 @@
 package br.com.letscode.turmaitau.projetoFinalModulo1;
 
+import java.math.BigDecimal;
+
 public class Conta {
 
     private String  nome;
     private String cpf;
     private String cnpj;
     private String tipoPessoa;
-    private double saldo;
-    double valorComTaxa = 0;
+    private BigDecimal saldo;
+    BigDecimal valorComTaxa =  new BigDecimal("0");
 
-    public Conta(String nome, String cpf, String cnpj, String tipoPessoa, double saldo) {
+    public Conta(String nome, String cpf, String cnpj, String tipoPessoa, BigDecimal saldo) {
         this.setNome(nome);
         this.setCpf(cpf);
         this.setCnpj(cnpj);
@@ -17,30 +19,31 @@ public class Conta {
         this.setSaldo(saldo);
     }
 
-    public void depositar(double valor) {
-        double novoSaldo = getSaldo() + valor;
+    public void depositar(BigDecimal valor) {
+        BigDecimal novoSaldo = getSaldo().add(valor);
         setSaldo(novoSaldo);
     }
 
-    public void transferir(double valor, Conta contaDestino) {
+    public void transferir(BigDecimal valor, Conta contaDestino) {
 
         valorComTaxa = taxacao(valor);
-        double novoSaldoDaContaOrigem = getSaldo() - valorComTaxa;
+        BigDecimal novoSaldoDaContaOrigem = getSaldo().subtract(valorComTaxa);
         setSaldo(novoSaldoDaContaOrigem, valor, contaDestino);
     }
 
-    public void sacar(double valor) {
+    public void sacar(BigDecimal valor) {
 
         valorComTaxa = taxacao(valor);
-        double novoSaldo = getSaldo() - valorComTaxa;
+        BigDecimal novoSaldo = getSaldo().subtract(valorComTaxa);
         setSaldo(novoSaldo);
     }
 
-    public double taxacao (double valor){
+    public BigDecimal taxacao (BigDecimal valor){
 
-        valorComTaxa = 0;
+        //valorComTaxa = 0;
         if (this.getTipoPessoa().toString().equals("PJ")){
-            valorComTaxa = valor + (valor*0.005);
+            //valorComTaxa = valor + (valor*0.005);
+            valorComTaxa = (valor.multiply(new BigDecimal("0.005"))).add(valor);
         }else{
             valorComTaxa = valor;
         }
@@ -78,24 +81,26 @@ public class Conta {
         this.tipoPessoa = tipoPessoa;
     }
 
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
 
         return saldo;
     }
-    public void setSaldo(double saldo) {
+    public void setSaldo(BigDecimal saldo) {
 
-        if (saldo >= 0) {
+        //if (saldo>=0)
+        if (saldo.compareTo(new BigDecimal(0)) >= 0) {
             this.saldo = saldo;
         } else {
             System.out.println("A conta não possui saldo suficiente. Operação não realizada!");
         }
     }
 
-    public void setSaldo(double saldo, double valor, Conta contaDestino) {
+    public void setSaldo(BigDecimal saldo, BigDecimal valor, Conta contaDestino) {
 
-        if (saldo >= 0) {
+        //if (saldo >= 0) {
+        if (saldo.compareTo(new BigDecimal(0)) >= 0) {
             this.saldo = saldo;
-            double novoSaldoDaContaDestino = contaDestino.getSaldo() + valor;
+            BigDecimal novoSaldoDaContaDestino = contaDestino.getSaldo().add(valor);
             contaDestino.setSaldo(novoSaldoDaContaDestino);
         } else {
             System.out.println("A conta não possui saldo suficiente. Operação não realizada!");

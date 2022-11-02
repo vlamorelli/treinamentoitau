@@ -1,5 +1,6 @@
 package br.com.letscode.turmaitau.projetoFinalModulo1;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Funcionalidade {
@@ -74,14 +75,14 @@ public class Funcionalidade {
     public void operacoes(Conta novaConta){
         //sacar, depositar, transferência, investir e consultar saldo
         String tipoOperacao="C";
-        double valor = 0.0;
+        BigDecimal valor;
         Scanner entrada = new Scanner(System.in);
 
         System.out.println("Seja bem vindo " + novaConta.getNome());
 
         while (!tipoOperacao.equals("X")) {
 
-            valor = 0.0;
+            valor = new BigDecimal("0.0");
             StringBuffer sb = new StringBuffer();
             sb.append(SEPARADOR).append("\n");
             sb.append("Qual operação deseja realizar?").append("\n");
@@ -97,18 +98,18 @@ public class Funcionalidade {
             switch (tipoOperacao) {
                 case "S":
                     System.out.println("Digite o valor que deseja sacar:");
-                    valor = entrada.nextDouble();
+                    valor = entrada.nextBigDecimal();
                     novaConta.sacar(valor);
                     break;
                 case "D":
                     System.out.println("Digite o valor que deseja depositar:");
-                    valor = entrada.nextDouble();
+                    valor = entrada.nextBigDecimal();
                     novaConta.depositar(valor);
                     break;
                 case "T":
-                    Conta contaDestino = new Conta("Milton", "123.456.789-10", null, "PF", 0.0);
+                    Conta contaDestino = new Conta("Milton", "123.456.789-10", null, "PF", new BigDecimal("0.0"));
                     System.out.println("Digite o valor que deseja transferir:");
-                    valor = entrada.nextDouble();
+                    valor = entrada.nextBigDecimal();
                     novaConta.transferir(valor, contaDestino);
                     break;
                 case "C":
