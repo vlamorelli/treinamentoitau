@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class FuncionarioComEncapsulamento {
 
-     String nome;
-    String cpf;
-     BigDecimal salarioBase;
+    private String nome;
+    private String cpf;
+    private BigDecimal salarioBase;
 
     public FuncionarioComEncapsulamento(String nome, String cpf, BigDecimal salarioBase) {
         this.setNome(nome);
