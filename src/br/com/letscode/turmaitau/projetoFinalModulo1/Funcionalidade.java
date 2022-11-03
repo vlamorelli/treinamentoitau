@@ -107,7 +107,7 @@ public class Funcionalidade {
                     novaConta.depositar(valor);
                     break;
                 case "T":
-                    Conta contaDestino = new Conta("Milton", "123.456.789-10", null, "PF", new BigDecimal("0.0"));
+                    Conta contaDestino = new Conta("Milton", "123.456.789-10", null, "PF", new BigDecimal("0"));
                     System.out.println("Digite o valor que deseja transferir:");
                     valor = entrada.nextBigDecimal();
                     novaConta.transferir(valor, contaDestino);
@@ -130,11 +130,13 @@ public class Funcionalidade {
         String tipoConta;
         Scanner entrada = new Scanner(System.in);
         StringBuffer sb = new StringBuffer();
+        sb.append(SEPARADOR).append("\n");
         sb.append("Conta Corrente - Digite CC: ").append("\n");
         if (tipoPessoa.toString().equals("F")){
             sb.append("Conta Poupança - Digite CP: ").append("\n");
         }
         sb.append("Conta Investimento - Digite CI: ").append("\n");
+        sb.append(SEPARADOR);
         System.out.println(sb.toString());
         tipoConta = entrada.next().toUpperCase();
 

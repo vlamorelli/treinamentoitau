@@ -11,17 +11,23 @@ public class Conta {
     private BigDecimal saldo;
     BigDecimal valorComTaxa =  new BigDecimal("0");
 
+    static final String OPERACAOVALIDA = "Operação realizada com sucesso!";
+    static final String OPERACAOINVALIDA = "A conta não possui saldo suficiente. Operação não realizada!";
+
+    static final String STRINGSALDO = "Seu saldo é: R$ ";
+
     public Conta(String nome, String cpf, String cnpj, String tipoPessoa, BigDecimal saldo) {
-        this.setNome(nome);
-        this.setCpf(cpf);
-        this.setCnpj(cnpj);
-        this.setTipoPessoa(tipoPessoa);
-        this.setSaldo(saldo);
+        this.nome = nome;
+        this.cpf = cpf;
+        this.cnpj = cnpj;
+        this.tipoPessoa = tipoPessoa;
+        this.saldo= saldo;
     }
 
     public void depositar(BigDecimal valor) {
         BigDecimal novoSaldo = getSaldo().add(valor);
         setSaldo(novoSaldo);
+        System.out.println(STRINGSALDO + getSaldo());
     }
 
     public void transferir(BigDecimal valor, Conta contaDestino) {
@@ -29,6 +35,7 @@ public class Conta {
         valorComTaxa = taxacao(valor);
         BigDecimal novoSaldoDaContaOrigem = getSaldo().subtract(valorComTaxa);
         setSaldo(novoSaldoDaContaOrigem, valor, contaDestino);
+        System.out.println(STRINGSALDO + getSaldo());
     }
 
     public void sacar(BigDecimal valor) {
@@ -36,6 +43,7 @@ public class Conta {
         valorComTaxa = taxacao(valor);
         BigDecimal novoSaldo = getSaldo().subtract(valorComTaxa);
         setSaldo(novoSaldo);
+        System.out.println(STRINGSALDO + getSaldo());
     }
 
     public BigDecimal taxacao (BigDecimal valor){
@@ -87,11 +95,11 @@ public class Conta {
     }
     public void setSaldo(BigDecimal saldo) {
 
-        //if (saldo>=0)
         if (saldo.compareTo(new BigDecimal(0)) >= 0) {
             this.saldo = saldo;
+            System.out.println(OPERACAOVALIDA);
         } else {
-            System.out.println("A conta não possui saldo suficiente. Operação não realizada!");
+            System.out.println(OPERACAOINVALIDA);
         }
     }
 
@@ -103,7 +111,7 @@ public class Conta {
             BigDecimal novoSaldoDaContaDestino = contaDestino.getSaldo().add(valor);
             contaDestino.setSaldo(novoSaldoDaContaDestino);
         } else {
-            System.out.println("A conta não possui saldo suficiente. Operação não realizada!");
+            System.out.println(OPERACAOINVALIDA);
         }
 
     }

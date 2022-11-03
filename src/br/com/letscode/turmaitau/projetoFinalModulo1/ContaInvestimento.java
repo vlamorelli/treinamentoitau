@@ -21,5 +21,6 @@ public class ContaInvestimento extends Conta{
             novoSaldo = (valor.multiply(new BigDecimal("0.035"))).add(valor).add(getSaldo());
         }
         setSaldo(novoSaldo);
+        System.out.println(STRINGSALDO + getSaldo());
     }
 }

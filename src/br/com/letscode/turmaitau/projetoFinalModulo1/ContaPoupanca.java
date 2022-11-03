@@ -13,5 +13,6 @@ public class ContaPoupanca extends Conta{
         //double novoSaldo = getSaldo() + valor + (valor*0.01);
         novoSaldo = (valor.multiply(new BigDecimal("0.01"))).add(valor).add(getSaldo());
         setSaldo(novoSaldo);
+        System.out.println(STRINGSALDO + getSaldo());
     }
 }
