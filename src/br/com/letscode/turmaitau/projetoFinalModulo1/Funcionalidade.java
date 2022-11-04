@@ -8,10 +8,10 @@ public class Funcionalidade {
     static final String OPCAOPESSOA = "Digite F para Pessoa Física ou J para Pessoa Juridica:";
     static final String SEPARADOR = "==============================================================";
 
-    public String[] abrirConta(){
+    public Object[] abrirConta(){
 
         Scanner entrada = new Scanner(System.in);
-        String [] conta = new String[5];
+        Object [] conta = new Object[2];
         String tipoPessoa;
         String tipoConta;
         String nome;
@@ -41,17 +41,16 @@ public class Funcionalidade {
 
             tipoConta = validaTipoConta (tipoPessoa);
 
-            System.out.println("Digite o nome: ");
+           System.out.println("Digite o nome: ");
             nome = entrada.next();
 
             System.out.println("Digite o CPF: ");
             cpf = entrada.next();
 
-            conta[0] = nome;
-            conta[1] = cpf;
-            conta[2] = null;
-            conta[3] = "PF";
-            conta[4] = tipoConta;
+            Pessoa pessoafisica = new PessoaFisica(nome, cpf);
+
+            conta[0] = pessoafisica;
+            conta[1] = tipoConta;
 
         }else{
 
@@ -63,11 +62,10 @@ public class Funcionalidade {
             System.out.println("Digite o CNPJ: ");
             cnpj = entrada.next();
 
-            conta[0] = nome;
-            conta[1] = null;
-            conta[2] = cnpj;
-            conta[3] = "PJ";
-            conta[4] = tipoConta;
+            Pessoa pessoajuridica = new PessoaJuridica(nome, cnpj);
+
+            conta[0] = pessoajuridica;
+            conta[1] = tipoConta;
         }
 
         return conta;
@@ -78,7 +76,7 @@ public class Funcionalidade {
         BigDecimal valor;
         Scanner entrada = new Scanner(System.in);
 
-        System.out.println("Seja bem vindo " + novaConta.getNome());
+        System.out.println("Seja bem vindo " + novaConta.getPessoa().getNome());
 
         while (!tipoOperacao.equals("X")) {
 
@@ -107,7 +105,8 @@ public class Funcionalidade {
                     novaConta.depositar(valor);
                     break;
                 case "T":
-                    Conta contaDestino = new Conta("Milton", "123.456.789-10", null, "PF", new BigDecimal("0"));
+                   // Conta contaDestino = new ContaCorrente("Milton", "123.456.789-10", null, "PF", new BigDecimal("0"));
+                    Conta contaDestino= new ContaCorrente(String.valueOf(System.currentTimeMillis()), novaConta.getPessoa(),  BigDecimal.ZERO);
                     System.out.println("Digite o valor que deseja transferir:");
                     valor = entrada.nextBigDecimal();
                     novaConta.transferir(valor, contaDestino);

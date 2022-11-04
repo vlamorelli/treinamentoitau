@@ -6,13 +6,13 @@ public class ContaInvestimento extends Conta{
 
     BigDecimal novoSaldo =  new BigDecimal("0");
 
-    public ContaInvestimento(String nome, String cpf, String cnpj, String tipoPessoa, BigDecimal saldo) {
-        super(nome, cpf, cnpj, tipoPessoa, saldo);
+    public ContaInvestimento(String numero, Pessoa pessoa, BigDecimal saldo) {
+        super(numero, pessoa, saldo);
     }
 
     public void depositar(BigDecimal valor) {
         //double novoSaldo = 0.0;
-        if (this.getTipoPessoa().toString().equals("PF")){
+        if (getPessoa() instanceof PessoaFisica) {
             //novoSaldo = getSaldo() + valor + (valor*0.015);
             novoSaldo = (valor.multiply(new BigDecimal("0.015"))).add(valor).add(getSaldo());
             //valorComTaxa = (valor.multiply(new BigDecimal(0.005))).add(valor);

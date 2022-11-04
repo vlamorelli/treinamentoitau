@@ -5,8 +5,9 @@ import java.math.BigDecimal;
 public class ContaPoupanca extends Conta{
 
     BigDecimal novoSaldo =  new BigDecimal("0");
-    public ContaPoupanca(String nome, String cpf, String cnpj, String tipoPessoa, BigDecimal saldo) {
-        super(nome, cpf, cnpj, tipoPessoa, saldo);
+
+    public ContaPoupanca(String numero, Pessoa pessoa, BigDecimal saldo) {
+        super(numero, pessoa, saldo);
     }
 
     public void depositar(BigDecimal valor) {
