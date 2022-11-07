@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Calculadora {
     static double RESULTADO = 0;
-
+//comentario para exercicio do pull (aula GIT) - sem alterações
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
