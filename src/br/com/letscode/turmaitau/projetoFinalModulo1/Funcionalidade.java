@@ -8,7 +8,7 @@ public class Funcionalidade {
     static final String OPCAOPESSOA = "Digite F para Pessoa Física ou J para Pessoa Juridica:";
     static final String SEPARADOR = "==============================================================";
 
-    public Object[] abrirConta(){
+    public Object[] abrirConta() {
 
         Scanner entrada = new Scanner(System.in);
         Object [] conta = new Object[2];
@@ -23,7 +23,7 @@ public class Funcionalidade {
         sb.append("Olá Cliente. ");
         sb.append("Seja bem vindo ao Banco XPTO. ").append("\n");
         sb.append("Nunca foi tão fácil abrir sua conta.").append("\n");
-        sb.append("Me diz, que tipo de conta você deseja abrir?").append("\n");
+        sb.append("Me diz, você deseja abrir uma Conta PF ou PJ?").append("\n");
         sb.append(OPCAOPESSOA);
         System.out.println(sb.toString());
         tipoPessoa = entrada.next().toUpperCase();
@@ -37,12 +37,12 @@ public class Funcionalidade {
 
         }
 
+        tipoConta = validaTipoConta (tipoPessoa);
+
+        System.out.println("Digite o nome:");
+        nome = entrada.next();
+
         if(tipoPessoa.equals("F")){
-
-            tipoConta = validaTipoConta (tipoPessoa);
-
-           System.out.println("Digite o nome: ");
-            nome = entrada.next();
 
             System.out.println("Digite o CPF: ");
             cpf = entrada.next();
@@ -53,11 +53,6 @@ public class Funcionalidade {
             conta[1] = tipoConta;
 
         }else{
-
-            tipoConta = validaTipoConta (tipoPessoa);
-
-            System.out.println("Digite o nome da empresa: ");
-            nome = entrada.next();
 
             System.out.println("Digite o CNPJ: ");
             cnpj = entrada.next();
@@ -70,7 +65,7 @@ public class Funcionalidade {
 
         return conta;
     }
-    public void operacoes(Conta novaConta){
+    public void operacoes(Conta novaConta) throws ValidaValorExpection {
         //sacar, depositar, transferência, investir e consultar saldo
         String tipoOperacao="C";
         BigDecimal valor;
@@ -97,11 +92,13 @@ public class Funcionalidade {
                 case "S":
                     System.out.println("Digite o valor que deseja sacar:");
                     valor = entrada.nextBigDecimal();
+                    validaValor(valor);
                     novaConta.sacar(valor);
                     break;
                 case "D":
                     System.out.println("Digite o valor que deseja depositar:");
                     valor = entrada.nextBigDecimal();
+                    validaValor(valor);
                     novaConta.depositar(valor);
                     break;
                 case "T":
@@ -109,6 +106,7 @@ public class Funcionalidade {
                     Conta contaDestino= new ContaCorrente(String.valueOf(System.currentTimeMillis()), novaConta.getPessoa(),  BigDecimal.ZERO);
                     System.out.println("Digite o valor que deseja transferir:");
                     valor = entrada.nextBigDecimal();
+                    validaValor(valor);
                     novaConta.transferir(valor, contaDestino);
                     break;
                 case "C":
@@ -130,6 +128,7 @@ public class Funcionalidade {
         Scanner entrada = new Scanner(System.in);
         StringBuffer sb = new StringBuffer();
         sb.append(SEPARADOR).append("\n");
+        sb.append("Qual tipo de conta você deseja?").append("\n");
         sb.append("Conta Corrente - Digite CC: ").append("\n");
         if (tipoPessoa.toString().equals("F")){
             sb.append("Conta Poupança - Digite CP: ").append("\n");
@@ -150,5 +149,11 @@ public class Funcionalidade {
 
         }
         return tipoConta;
+    }
+
+    public void validaValor(BigDecimal valor) throws ValidaValorExpection {
+        if ((valor.compareTo(new BigDecimal(0)) <= 0)){
+            throw new ValidaValorExpection("Valor precisa ser maior do que zero (0). Operação não realizada!");
+        }
     }
 }

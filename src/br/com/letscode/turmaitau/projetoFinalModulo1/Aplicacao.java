@@ -4,27 +4,41 @@ import java.math.BigDecimal;
 
 public class Aplicacao {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         Object[] conta;
         Funcionalidade funcionalidade = new Funcionalidade();
         conta = funcionalidade.abrirConta();
+        Conta novaconta = getConta(conta);
+        realizarOperacao(novaconta, funcionalidade);
+    }
+
+    public static Conta getConta(Object[] conta){
+        Conta novaConta= null;
         switch ((String) conta[1]) {
             case "CC":
-                Conta novaContaCorrente = new ContaCorrente(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
-                funcionalidade.operacoes(novaContaCorrente);
+                novaConta = new ContaCorrente(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
                 break;
             case "CP":
-                Conta novaPoupanca= new ContaPoupanca(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
-                funcionalidade.operacoes(novaPoupanca);
+                novaConta= new ContaPoupanca(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
                 break;
             case "CI":
-                Conta novaInvestimento = new ContaInvestimento(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
-                funcionalidade.operacoes(novaInvestimento);
+                novaConta = new ContaInvestimento(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
                 break;
             default:
                 System.out.println("Opção Inválida!!!");
                 break;
+        }
+        return novaConta;
+    }
+
+    public static void realizarOperacao(Conta novaConta, Funcionalidade funcionalidade){
+
+        try {
+            funcionalidade.operacoes(novaConta);
+        } catch (ValidaValorExpection e) {
+            System.out.println(e.getMessage());
+            realizarOperacao(novaConta, funcionalidade);
         }
     }
 }
