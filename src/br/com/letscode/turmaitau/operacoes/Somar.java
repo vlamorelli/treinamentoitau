@@ -1,6 +1,6 @@
 package br.com.letscode.turmaitau.operacoes;
 
-public class Somar {
+public class Somar implements OperacaoInterface{
 
     public Somar() {
         System.out.println("Construtor da classe Somar");

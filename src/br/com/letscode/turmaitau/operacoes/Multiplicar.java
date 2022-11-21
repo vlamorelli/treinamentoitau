@@ -5,7 +5,7 @@ package br.com.letscode.turmaitau.operacoes;
     default: dentro do pacote (operacoes)
     public: em qualquer parte do codigo
  */
-public class Multiplicar {
+public class Multiplicar implements OperacaoInterface{
 
     //variaveis
 

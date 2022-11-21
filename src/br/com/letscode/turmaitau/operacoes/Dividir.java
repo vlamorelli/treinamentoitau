@@ -1,6 +1,6 @@
 package br.com.letscode.turmaitau.operacoes;
 
-public class Dividir {
+public class Dividir implements OperacaoInterface{
 
     public void realizarOperacao(double numero1, double numero2) {
 
