@@ -8,8 +8,6 @@ public class Pessoa {
 
     public Pessoa(String nome) {
 
-       /* System.out.println("Digite o nome: ");
-        nome = entrada.next();*/
         this.nome = nome;
     }
 

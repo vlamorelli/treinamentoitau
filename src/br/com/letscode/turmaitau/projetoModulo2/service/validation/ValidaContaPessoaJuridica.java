@@ -1,8 +1,7 @@
 package br.com.letscode.turmaitau.projetoModulo2.service.validation;
 
-import br.com.letscode.turmaitau.projetoFinalModulo1.Pessoa;
-import br.com.letscode.turmaitau.projetoFinalModulo1.PessoaFisica;
-import br.com.letscode.turmaitau.projetoFinalModulo1.PessoaJuridica;
+import br.com.letscode.turmaitau.projetoModulo2.entidades.Pessoa;
+import br.com.letscode.turmaitau.projetoModulo2.entidades.PessoaJuridica;
 
 import java.util.Scanner;
 

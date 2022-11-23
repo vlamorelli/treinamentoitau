@@ -1,9 +1,11 @@
 package br.com.letscode.turmaitau.projetoModulo2.service;
 
+import br.com.letscode.turmaitau.projetoModulo2.entidades.*;
 import br.com.letscode.turmaitau.projetoModulo2.service.validation.ValidaConta;
 import br.com.letscode.turmaitau.projetoModulo2.service.validation.ValidaContaPessoaFisica;
 import br.com.letscode.turmaitau.projetoModulo2.service.validation.ValidaContaPessoaJuridica;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class AbrirConta {
@@ -12,7 +14,7 @@ public class AbrirConta {
     static final String OPCAOPESSOA = "Digite F para Pessoa Física ou J para Pessoa Juridica:";
     static final String SEPARADOR = "==============================================================";
 
-    public Object[] abrirConta() {
+    public Conta abrirConta() {
 
         Scanner entrada = new Scanner(System.in);
         Object [] conta = new Object[2];
@@ -46,6 +48,28 @@ public class AbrirConta {
 
         conta = validaConta.validaTipoConta();
 
-        return conta;
+        //return conta;
+       Conta novaconta = getConta(conta);
+
+        return novaconta;
+    }
+
+    public static Conta getConta(Object[] conta){
+        Conta novaConta= null;
+        switch ((String) conta[1]) {
+            case "CC":
+                novaConta = new ContaCorrente(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
+                break;
+            case "CP":
+                novaConta= new ContaPoupanca(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
+                break;
+            case "CI":
+                novaConta = new ContaInvestimento(String.valueOf(System.currentTimeMillis()), (Pessoa) conta[0] ,  BigDecimal.ZERO);
+                break;
+            default:
+                System.out.println("Opção Inválida!!!");
+                break;
+        }
+        return novaConta;
     }
 }

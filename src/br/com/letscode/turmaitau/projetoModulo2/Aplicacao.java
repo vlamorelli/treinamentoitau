@@ -1,6 +1,8 @@
 package br.com.letscode.turmaitau.projetoModulo2;
 
-import br.com.letscode.turmaitau.projetoFinalModulo1.*;
+import br.com.letscode.turmaitau.projetoFinalModulo1.Funcionalidade;
+import br.com.letscode.turmaitau.projetoFinalModulo1.ValidaValorExpection;
+import br.com.letscode.turmaitau.projetoModulo2.entidades.*;
 import br.com.letscode.turmaitau.projetoModulo2.service.AbrirConta;
 
 import java.math.BigDecimal;
@@ -12,18 +14,34 @@ public class Aplicacao {
 
         Object[] conta;
         AbrirConta abrirConta = new AbrirConta();
-        conta = abrirConta.abrirConta();
-        Conta novaconta = getConta(conta);
+        Conta novaconta = abrirConta.abrirConta();
+
+        realizarOperacao(novaconta, funcionalidade);
+
+        //System.out.println(novaconta);
+
+        //conta = abrirConta.abrirConta();
+        //Conta novaconta = getConta(conta);
      //   realizarOperacao(novaconta, funcionalidade);
 
     }
 
     /*
-        Essa parte debaixo iremos colocar dentro da classe abrir conta e retonar a conta
+        Essa parte debaixo iremos colocar dentro da classe abrir conta e retonar a conta (DONE)
         Criar uma interface de funcionalidade implementando as classes Service
      */
 
-    public static Conta getConta(Object[] conta){
+    public static void realizarOperacao(br.com.letscode.turmaitau.projetoFinalModulo1.Conta novaConta, Funcionalidade funcionalidade){
+
+        try {
+            funcionalidade.operacoes(novaConta);
+        } catch (ValidaValorExpection e) {
+            System.out.println(e.getMessage());
+            realizarOperacao(novaConta, funcionalidade);
+        }
+    }
+
+ /*   public static Conta getConta(Object[] conta){
         Conta novaConta= null;
         switch ((String) conta[1]) {
             case "CC":
@@ -40,5 +58,5 @@ public class Aplicacao {
                 break;
         }
         return novaConta;
-    }
+    }*/
 }
