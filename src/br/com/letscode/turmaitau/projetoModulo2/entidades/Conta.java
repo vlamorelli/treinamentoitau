@@ -27,7 +27,7 @@ public abstract class Conta {
 
         return saldo;
     }
-    protected void setSaldo(BigDecimal saldo) {
+    public void setSaldo(BigDecimal saldo) {
 
         if (saldo.compareTo(new BigDecimal(0)) >= 0) {
             this.saldo = saldo;
@@ -37,7 +37,7 @@ public abstract class Conta {
         }
     }
 
-    protected void setSaldo(BigDecimal saldo, BigDecimal valor, Conta contaDestino) {
+    public void setSaldo(BigDecimal saldo, BigDecimal valor, Conta contaDestino) {
 
         if (saldo.compareTo(new BigDecimal(0)) >= 0) {
             this.saldo = saldo;

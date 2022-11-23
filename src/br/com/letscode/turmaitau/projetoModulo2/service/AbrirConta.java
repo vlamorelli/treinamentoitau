@@ -1,15 +1,14 @@
 package br.com.letscode.turmaitau.projetoModulo2.service;
 
 import br.com.letscode.turmaitau.projetoModulo2.entidades.*;
-import br.com.letscode.turmaitau.projetoModulo2.service.validation.ValidaConta;
-import br.com.letscode.turmaitau.projetoModulo2.service.validation.ValidaContaPessoaFisica;
-import br.com.letscode.turmaitau.projetoModulo2.service.validation.ValidaContaPessoaJuridica;
+import br.com.letscode.turmaitau.projetoModulo2.service.validation.Conta.ValidaConta;
+import br.com.letscode.turmaitau.projetoModulo2.service.validation.Conta.ValidaContaPessoaFisica;
+import br.com.letscode.turmaitau.projetoModulo2.service.validation.Conta.ValidaContaPessoaJuridica;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class AbrirConta {
-
 
     static final String OPCAOPESSOA = "Digite F para Pessoa Física ou J para Pessoa Juridica:";
     static final String SEPARADOR = "==============================================================";
@@ -48,7 +47,6 @@ public class AbrirConta {
 
         conta = validaConta.validaTipoConta();
 
-        //return conta;
        Conta novaconta = getConta(conta);
 
         return novaconta;
