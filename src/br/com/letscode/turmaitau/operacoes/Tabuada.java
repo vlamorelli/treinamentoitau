@@ -1,6 +1,6 @@
 package br.com.letscode.turmaitau.operacoes;
 
-public class Tabuada {
+public class Tabuada implements OperacaoInterface{
 
     public void realizarOperacao(double multiplicando, double limiteMultiplicador) {
 

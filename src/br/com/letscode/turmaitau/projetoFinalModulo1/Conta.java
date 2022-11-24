@@ -1,110 +1,100 @@
 package br.com.letscode.turmaitau.projetoFinalModulo1;
 
-import java.util.Scanner;
+import java.math.BigDecimal;
 
-public class Conta {
+public abstract class Conta {
 
-    private String  nome;
-    private String cpf;
-    private String cnpj;
+    private String numero;
 
-    private String tipoPessoa;
-    private double saldo;
+    private Pessoa pessoa;
 
-    double valorComTaxa = 0;
+    private BigDecimal saldo;
 
-    public Conta(String nome, String cpf, String cnpj, String tipoPessoa, double saldo) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
-        this.tipoPessoa = tipoPessoa;
-        this.saldo = saldo;
+    BigDecimal valorComTaxa =  new BigDecimal("0");
+
+    static final String OPERACAOVALIDA = "Operação realizada com sucesso!";
+    static final String OPERACAOINVALIDA = "A conta não possui saldo suficiente. Operação não realizada!";
+
+    static final String STRINGSALDO = "Seu saldo é: R$ ";
+
+   // String mensagemCusto;
+
+    public Conta(String numero, Pessoa pessoa, BigDecimal saldo) {
+        this.numero = numero;
+        this.pessoa = pessoa;
+        this.saldo= saldo;
     }
 
-    public void depositar(double valor) {
-        double novoSaldo = getSaldo() + valor;
-        setSaldo(novoSaldo);
-    }
+    public abstract void depositar(BigDecimal valor);
 
-    public void transferir(double valor, Conta contaDestino) {
+    public void transferir(BigDecimal valor, Conta contaDestino) {
 
         valorComTaxa = taxacao(valor);
-        double novoSaldoDaContaOrigem = getSaldo() - valorComTaxa;
-        setSaldoTransferencia(novoSaldoDaContaOrigem, valor, contaDestino);
+        BigDecimal novoSaldoDaContaOrigem = getSaldo().subtract(valorComTaxa);
+        setSaldo(novoSaldoDaContaOrigem, valor, contaDestino);
+        System.out.println(STRINGSALDO + getSaldo());
     }
 
-    public void sacar(double valor) {
+    public void sacar(BigDecimal valor) {
 
         valorComTaxa = taxacao(valor);
-        double novoSaldo = getSaldo() - valorComTaxa;
+        BigDecimal novoSaldo = getSaldo().subtract(valorComTaxa);
         setSaldo(novoSaldo);
+        System.out.println(STRINGSALDO + getSaldo());
+
     }
 
-    public double taxacao (double valor){
+    public BigDecimal taxacao (BigDecimal valor){
 
-        valorComTaxa = 0;
-        if (this.getTipoPessoa().toString().equals("PJ")){
-            valorComTaxa = valor + (valor*0.05);
+        if (pessoa instanceof PessoaJuridica){
+            valorComTaxa = (valor.multiply(new BigDecimal("0.005"))).add(valor);
         }else{
             valorComTaxa = valor;
         }
         return valorComTaxa;
     }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
 
-        this.nome = nome;
-    }
 
-    public String getCpf() {
-        return cpf;
-    }
-    public void setCpf(String cpf) {
-
-        this.cpf = cpf;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-    public void setCnpj(String cnpj) {
-
-        this.cnpj = cnpj;
-    }
-
-    public String getTipoPessoa() {
-        return tipoPessoa;
-    }
-
-    public void setTipoPessoa(String tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
-    }
-
-    public double getSaldo() {
+    public BigDecimal getSaldo() {
 
         return saldo;
     }
-    public void setSaldo(double saldo) {
+    protected void setSaldo(BigDecimal saldo) {
 
-        if (saldo >= 0) {
+        if (saldo.compareTo(new BigDecimal(0)) >= 0) {
             this.saldo = saldo;
+            System.out.println(OPERACAOVALIDA);
         } else {
-            System.out.println("A conta não possui saldo suficiente. Operação não realizada!");
+            System.out.println(OPERACAOINVALIDA);
         }
     }
 
-    public void setSaldoTransferencia(double saldo, double valor, Conta contaDestino) {
+    protected void setSaldo(BigDecimal saldo, BigDecimal valor, Conta contaDestino) {
 
-        if (saldo >= 0) {
+        if (saldo.compareTo(new BigDecimal(0)) >= 0) {
             this.saldo = saldo;
-            double novoSaldoDaContaDestino = contaDestino.getSaldo() + valor;
+            BigDecimal novoSaldoDaContaDestino = contaDestino.getSaldo().add(valor);
             contaDestino.setSaldo(novoSaldoDaContaDestino);
         } else {
-            System.out.println("A conta não possui saldo suficiente. Operação não realizada!");
+            System.out.println(OPERACAOINVALIDA);
         }
 
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
 }
