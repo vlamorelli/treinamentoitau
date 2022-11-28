@@ -2,7 +2,11 @@ package br.com.letscode.turmaitau.projetoModulo2.service.operacoes;
 
 import br.com.letscode.turmaitau.projetoModulo2.entidades.Conta;
 import br.com.letscode.turmaitau.projetoModulo2.entidades.ContaCorrente;
+import br.com.letscode.turmaitau.projetoModulo2.entidades.ContaInvestimento;
+import br.com.letscode.turmaitau.projetoModulo2.entidades.ContaPoupanca;
 import br.com.letscode.turmaitau.projetoModulo2.exception.ValidaValorExpection;
+import br.com.letscode.turmaitau.projetoModulo2.service.operacoes.DepositarContaCorrente;
+
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -41,7 +45,7 @@ public class MenuOperacao {
                     funcionalidade.operacoes(novaConta);
                     break;
                 case "D":
-                    funcionalidade = new Depositar();
+                    funcionalidade = funcionalidadeDepositar(novaConta);
                     funcionalidade.operacoes(novaConta);
                     break;
                 case "T":
@@ -60,6 +64,18 @@ public class MenuOperacao {
                     break;
             }
         }
+    }
+
+    private Funcionalidade funcionalidadeDepositar(Conta novaConta){
+
+        if(novaConta instanceof ContaInvestimento){
+            return new DepositarContaInvestimento();
+        }else if (novaConta instanceof ContaCorrente){
+            return new DepositarContaCorrente();
+        }else if (novaConta instanceof ContaPoupanca){
+            return new DepositarContaPoupanca();
+        }
+        return null;
     }
 
 }

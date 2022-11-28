@@ -29,24 +29,12 @@ public abstract class Conta {
     }
     public void setSaldo(BigDecimal saldo) {
 
-        if (saldo.compareTo(new BigDecimal(0)) >= 0) {
-            this.saldo = saldo;
-            System.out.println(OPERACAOVALIDA);
-        } else {
-            System.out.println(OPERACAOINVALIDA);
-        }
+        this.saldo = saldo;
     }
 
     public void setSaldo(BigDecimal saldo, BigDecimal valor, Conta contaDestino) {
 
-        if (saldo.compareTo(new BigDecimal(0)) >= 0) {
-            this.saldo = saldo;
-            BigDecimal novoSaldoDaContaDestino = contaDestino.getSaldo().add(valor);
-            contaDestino.setSaldo(novoSaldoDaContaDestino);
-        } else {
-            System.out.println(OPERACAOINVALIDA);
-        }
-
+        this.saldo = saldo;
     }
 
     public String getNumero() {

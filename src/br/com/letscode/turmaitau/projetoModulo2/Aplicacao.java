@@ -11,7 +11,6 @@ public class Aplicacao {
 
     public static void main(String[] args) {
 
-        //Object[] conta;
         AbrirConta abrirConta = new AbrirConta();
         Conta novaconta = abrirConta.abrirConta();
         MenuOperacao menuOperacao = new MenuOperacao();

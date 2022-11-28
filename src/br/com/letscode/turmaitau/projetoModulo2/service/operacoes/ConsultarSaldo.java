@@ -4,7 +4,7 @@ import br.com.letscode.turmaitau.projetoModulo2.entidades.Conta;
 
 import java.math.BigDecimal;
 
-public class ConsultarSaldo implements Funcionalidade{
+public class ConsultarSaldo implements Funcionalidade<Conta>{
     @Override
     public void operacoes(Conta novaconta) {
 
